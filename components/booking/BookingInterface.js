@@ -146,20 +146,20 @@ export default function BookingInterface({ event, profile, availableDays = [] })
 
   if (step === 'success') {
     return (
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden max-w-[800px] w-full mx-auto">
+      <div className="bg-white rounded-[24px] shadow-sm border border-[#E8E4DE] overflow-hidden max-w-[800px] w-full mx-auto">
         <div className="p-8 md:p-12 text-center">
-          <div className="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-16 h-16 bg-[#EAF2ED] text-[#053D2A] rounded-full flex items-center justify-center mx-auto mb-6">
             <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Meeting confirmed</h2>
-          <p className="text-gray-600 mb-8">You are scheduled with {profile.user_name}.</p>
+          <h2 className="text-2xl font-bold text-[#1E1B16] mb-2">Meeting confirmed</h2>
+          <p className="text-[#717974] mb-8">You are scheduled with {profile.user_name}.</p>
           
-          <div className="bg-gray-50 rounded-xl p-6 text-left max-w-md mx-auto mb-8">
-            <h3 className="font-semibold text-gray-900">{event.title}</h3>
-            <div className="mt-4 flex items-start gap-3 text-gray-600">
-              <svg className="w-5 h-5 mt-0.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="bg-[#FAF7F2] rounded-[16px] border border-[#E8E4DE] p-6 text-left max-w-md mx-auto mb-8">
+            <h3 className="font-semibold text-[#1E1B16]">{event.title}</h3>
+            <div className="mt-4 flex items-start gap-3 text-[#717974]">
+              <svg className="w-5 h-5 mt-0.5 text-[#9EA5A0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <div>
@@ -167,8 +167,8 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                 {selectedSlot && `${selectedSlot.time} (Duration: ${event.duration}m)`}
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-3 text-gray-600">
-              <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="mt-4 flex items-center gap-3 text-[#717974]">
+              <svg className="w-5 h-5 text-[#9EA5A0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               India Standard Time
@@ -180,7 +180,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
               href={bookingSuccessData.meeting_link} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-[#007AFF] px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 transition"
+              className="inline-flex items-center justify-center rounded-[16px] bg-[#1F4E3D] px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-[#053D2A] transition"
             >
               Join Meeting
             </a>
@@ -191,31 +191,36 @@ export default function BookingInterface({ event, profile, availableDays = [] })
   }
 
   return (
-    <div className={`bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden transition-[max-width] duration-300 ease-in-out w-full mx-auto flex flex-col md:flex-row ${
+    <div className={`bg-white rounded-[24px] shadow-sm border border-[#E8E4DE] overflow-hidden transition-[max-width] duration-300 ease-in-out w-full mx-auto flex flex-col md:flex-row ${
       step === 'calendar' && selectedDate ? 'max-w-[1050px]' : 'max-w-[800px]'
     }`}>
       {/* LEFT: Event Info Sidebar */}
-      <div className="w-full md:w-[320px] md:flex-shrink-0 bg-gray-50 border-b md:border-b-0 md:border-r border-gray-200 p-8">
-        <Link href={`/${profile.user_name}`} className="inline-flex items-center text-gray-500 hover:text-gray-900 transition mb-6">
-          <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back
-        </Link>
+      <div className="w-full md:w-[320px] md:flex-shrink-0 bg-[#FAF7F2] border-b md:border-b-0 md:border-r border-[#E8E4DE] p-8">
+        {step === 'details' && (
+          <button 
+            onClick={() => setStep('calendar')}
+            className="inline-flex items-center text-[#717974] hover:text-[#1E1B16] transition mb-6 font-medium"
+          >
+            <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back
+          </button>
+        )}
         
-        <h2 className="text-gray-500 font-medium">{profile.user_name}</h2>
-        <h1 className="text-2xl font-bold text-gray-900 mt-1 mb-4">{event.title}</h1>
+        <h2 className="text-[#717974] font-medium">{profile.user_name}</h2>
+        <h1 className="text-[28px] font-extrabold text-[#053D2A] mt-1 mb-4 leading-tight">{event.title}</h1>
         
-        <div className="flex flex-col gap-3 text-gray-600">
+        <div className="flex flex-col gap-3 text-[#1E1B16] font-medium">
           <div className="flex items-center gap-2">
-            <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 text-[#9EA5A0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {event.duration} minutes
           </div>
           {event.location_type && (
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-[#9EA5A0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
               {event.location_type === 'google_meet' ? 'Google Meet' : event.location_type}
@@ -224,13 +229,13 @@ export default function BookingInterface({ event, profile, availableDays = [] })
         </div>
         
         {event.description && (
-          <p className="text-gray-600 mt-6 whitespace-pre-wrap">{event.description}</p>
+          <p className="text-[#717974] mt-6 whitespace-pre-wrap leading-relaxed">{event.description}</p>
         )}
 
         {(selectedDate || step === 'details') && (
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <div className="flex items-start gap-2 text-gray-900 font-medium">
-              <svg className="w-5 h-5 mt-0.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="mt-8 pt-8 border-t border-[#E8E4DE]">
+            <div className="flex items-start gap-2 text-[#1E1B16] font-medium">
+              <svg className="w-5 h-5 mt-0.5 text-[#9EA5A0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <div>
@@ -239,7 +244,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
               </div>
             </div>
             {(selectedSlot || step === 'details') && (
-              <div className="mt-2 text-sm text-gray-500 ml-7">
+              <div className="mt-2 text-sm text-[#717974] ml-7">
                 India Standard Time
               </div>
             )}
@@ -253,19 +258,19 @@ export default function BookingInterface({ event, profile, availableDays = [] })
           <>
             {/* Calendar Block */}
             <div className="p-8 w-full md:w-[480px] md:flex-shrink-0">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Select a Date & Time</h3>
+              <h3 className="text-lg font-bold text-[#1E1B16] mb-4">Select a Date & Time</h3>
               
               <div className="mb-4 flex items-center justify-between">
-                <span className="font-medium text-gray-900">
+                <span className="font-medium text-[#1E1B16]">
                   {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </span>
                 <div className="flex gap-2">
-                  <button onClick={prevMonth} className="p-2 hover:bg-gray-100 rounded-full transition text-[#007AFF]">
+                  <button onClick={prevMonth} className="p-2 hover:bg-[#EAF2ED] rounded-full transition text-[#1F4E3D]">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
-                  <button onClick={nextMonth} className="p-2 hover:bg-gray-100 rounded-full transition text-[#007AFF]">
+                  <button onClick={nextMonth} className="p-2 hover:bg-[#EAF2ED] rounded-full transition text-[#1F4E3D]">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
@@ -275,7 +280,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
 
               <div className="grid grid-cols-7 gap-1 text-center mb-2">
                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                  <div key={day} className="text-xs font-medium text-gray-500 py-2">{day}</div>
+                  <div key={day} className="text-xs font-bold text-[#717974] uppercase tracking-wider py-2">{day}</div>
                 ))}
               </div>
               
@@ -297,10 +302,10 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                       disabled={isDisabled}
                       onClick={() => handleDateSelect(date)}
                       className={`
-                        aspect-square p-2 rounded-full flex items-center justify-center text-sm font-medium transition
-                        ${isDisabled ? 'text-gray-300 cursor-not-allowed' : 'hover:bg-blue-50 text-gray-700'}
-                        ${isSelected ? 'bg-[#007AFF] text-white hover:bg-blue-600' : ''}
-                        ${!isSelected && isToday && !isDisabled ? 'text-[#007AFF] bg-blue-50/50' : ''}
+                        aspect-square p-2 rounded-full flex items-center justify-center text-[15px] font-medium transition
+                        ${isDisabled ? 'text-[#C1CDC5] cursor-not-allowed' : 'hover:bg-[#EAF2ED] text-[#1E1B16]'}
+                        ${isSelected ? 'bg-[#1F4E3D] text-white hover:bg-[#053D2A]' : ''}
+                        ${!isSelected && isToday && !isDisabled ? 'text-[#1F4E3D] bg-[#EAF2ED]/50' : ''}
                       `}
                     >
                       {date.getDate()}
@@ -309,18 +314,17 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                 })}
               </div>
               
-              <div className="mt-6 text-sm text-gray-500 flex items-center">
-                <svg className="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="mt-6 text-sm text-[#717974] flex items-center font-medium">
+                <svg className="w-4 h-4 mr-1.5 text-[#9EA5A0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 India Standard Time
               </div>
             </div>
 
-            {/* Slots Block (slides in / expands) */}
             {selectedDate && (
-              <div className="w-full md:w-[250px] md:flex-shrink-0 flex flex-col pt-8 md:pt-8 md:pr-8 animate-fade-in-right md:border-l border-gray-100 pl-0 md:pl-8">
-                <div className="text-gray-900 font-medium mb-4">
+              <div className="w-full md:w-[250px] md:flex-shrink-0 flex flex-col pt-8 md:pt-8 md:pr-8 animate-fade-in-right md:border-l border-[#E8E4DE] pl-0 md:pl-8">
+                <div className="text-[#1E1B16] font-medium mb-4">
                   {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
                 </div>
                 
@@ -328,11 +332,11 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                   {loadingSlots ? (
                     <div className="flex flex-col gap-2">
                       {[1,2,3,4,5].map(i => (
-                        <div key={i} className="h-12 bg-gray-100 rounded-lg animate-pulse w-full"></div>
+                        <div key={i} className="h-[46px] bg-[#E8E4DE] rounded-[16px] animate-pulse w-full"></div>
                       ))}
                     </div>
                   ) : availableSlots.length === 0 ? (
-                    <div className="text-gray-500 text-sm text-center py-4 bg-gray-50 rounded-lg">
+                    <div className="text-[#717974] text-sm text-center py-4 bg-[#FAF7F2] rounded-[16px]">
                       No times available
                     </div>
                   ) : (
@@ -342,10 +346,10 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                           <div className="flex gap-2">
                             <button
                               onClick={() => handleSlotSelect(slot)}
-                              className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition border text-center
+                              className={`flex-1 py-[11px] px-4 rounded-[16px] text-sm font-bold transition border border-[#ECE7DF] text-center shadow-sm
                                 ${selectedSlot === slot 
-                                  ? 'bg-gray-600 border-gray-600 text-white w-1/2' 
-                                  : 'border-[#007AFF] text-[#007AFF] hover:border-blue-700 bg-white'
+                                  ? 'bg-[#1F4E3D] border-[#1F4E3D] text-white w-1/2' 
+                                  : 'text-[#1F4E3D] hover:border-[#053D2A] hover:bg-[#EAF2ED] bg-white'
                                 }
                               `}
                             >
@@ -354,7 +358,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                             {selectedSlot === slot && (
                               <button 
                                 onClick={handleContinue}
-                                className="flex-1 bg-[#007AFF] hover:bg-blue-600 text-white py-3 px-4 rounded-lg text-sm font-medium transition text-center w-1/2"
+                                className="flex-1 bg-[#053D2A] hover:bg-[#1F4E3D] text-white py-[11px] px-4 rounded-[16px] text-sm font-bold transition text-center w-1/2"
                               >
                                 Next
                               </button>
@@ -371,7 +375,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
         ) : step === 'details' ? (
           <div className="p-8 w-full">
             {bookingError && (
-              <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg text-sm border border-red-100 flex items-start">
+              <div className="mb-6 p-4 bg-[#FFEBEB] text-[#FF3B30] rounded-[16px] text-sm border border-[#FFD1D1] flex items-start font-medium">
                  <svg className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                  </svg>
@@ -379,41 +383,41 @@ export default function BookingInterface({ event, profile, availableDays = [] })
               </div>
             )}
 
-            <h3 className="text-xl font-bold text-gray-900 mb-6">Enter Details</h3>
+            <h3 className="text-xl font-bold text-[#1E1B16] mb-6">Enter Details</h3>
             
             <form onSubmit={handleBookMeeting} className="space-y-6 max-w-md">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                <label htmlFor="name" className="block text-[13px] font-bold text-[#717974] uppercase tracking-wider mb-2">Name *</label>
                 <input
                   type="text"
                   id="name"
                   required
                   value={guestDetails.name}
                   onChange={(e) => setGuestDetails({...guestDetails, name: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#007AFF] focus:border-[#007AFF] outline-none transition text-gray-900"
+                  className="w-full px-4 py-[13px] border border-[#ECE7DF] rounded-[14px] focus:ring-[1px] focus:ring-[#1F4E3D] focus:border-[#1F4E3D] outline-none transition text-[#1E1B16] shadow-sm bg-white font-medium"
                 />
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <label htmlFor="email" className="block text-[13px] font-bold text-[#717974] uppercase tracking-wider mb-2">Email *</label>
                 <input
                   type="email"
                   id="email"
                   required
                   value={guestDetails.email}
                   onChange={(e) => setGuestDetails({...guestDetails, email: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#007AFF] focus:border-[#007AFF] outline-none transition text-gray-900"
+                  className="w-full px-4 py-[13px] border border-[#ECE7DF] rounded-[14px] focus:ring-[1px] focus:ring-[#1F4E3D] focus:border-[#1F4E3D] outline-none transition text-[#1E1B16] shadow-sm bg-white font-medium"
                 />
               </div>
               
               <div>
-                <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">Please share anything that will help prepare for our meeting.</label>
+                <label htmlFor="notes" className="block text-[13px] font-bold text-[#717974] uppercase tracking-wider mb-2">Please share anything that will help prepare for our meeting.</label>
                 <textarea
                   id="notes"
                   rows="4"
                   value={guestDetails.notes}
                   onChange={(e) => setGuestDetails({...guestDetails, notes: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#007AFF] focus:border-[#007AFF] outline-none transition resize-none text-gray-900"
+                  className="w-full px-4 py-[13px] border border-[#ECE7DF] rounded-[14px] focus:ring-[1px] focus:ring-[#1F4E3D] focus:border-[#1F4E3D] outline-none transition resize-none text-[#1E1B16] shadow-sm bg-white font-medium"
                 ></textarea>
               </div>
               
@@ -421,7 +425,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="bg-[#007AFF] hover:bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition disabled:opacity-70 disabled:cursor-not-allowed flex items-center"
+                  className="bg-[#1F4E3D] hover:bg-[#053D2A] text-white px-8 py-[13px] rounded-full font-bold transition disabled:opacity-70 disabled:cursor-not-allowed flex items-center shadow-sm"
                 >
                   {submitting ? (
                     <>
@@ -436,7 +440,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                 <button
                   type="button"
                   onClick={() => setStep('calendar')}
-                  className="text-gray-600 hover:text-gray-900 font-medium transition"
+                  className="text-[#717974] hover:text-[#1E1B16] font-bold transition px-4 py-[13px]"
                   disabled={submitting}
                 >
                   Cancel
