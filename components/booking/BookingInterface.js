@@ -205,7 +205,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
       step === 'calendar' && selectedDate ? 'max-w-[1050px]' : 'max-w-[800px]'
     }`}>
       {/* LEFT: Event Info Sidebar */}
-      <div className="w-full md:w-[320px] md:flex-shrink-0 bg-[#FAF7F2] border-b md:border-b-0 md:border-r border-[#E8E4DE] p-8">
+      <div className="w-full md:w-[320px] md:flex-shrink-0 bg-[#FAF7F2] border-b md:border-b-0 md:border-r border-[#E8E4DE] p-6 md:p-8">
         {step === 'details' && (
           <button 
             onClick={() => setStep('calendar')}
@@ -219,7 +219,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
         )}
         
         <h2 className="text-[#717974] font-medium">{profile.user_name}</h2>
-        <h1 className="text-[28px] font-extrabold text-[#053D2A] mt-1 mb-4 leading-tight">{event.title}</h1>
+        <h1 className="text-2xl md:text-[28px] font-extrabold text-[#053D2A] mt-1 mb-4 leading-tight">{event.title}</h1>
         
         <div className="flex flex-col gap-3 text-[#1E1B16] font-medium">
           <div className="flex items-center gap-2">
@@ -267,7 +267,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
         {step === 'calendar' ? (
           <>
             {/* Calendar Block */}
-            <div className="p-8 w-full md:w-[480px] md:flex-shrink-0">
+            <div className="p-6 md:p-8 w-full md:w-[480px] md:flex-shrink-0">
               <h3 className="text-lg font-bold text-[#1E1B16] mb-4">Select a Date & Time</h3>
               
               <div className="mb-4 flex items-center justify-between">
@@ -312,7 +312,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                       disabled={isDisabled}
                       onClick={() => handleDateSelect(date)}
                       className={`
-                        aspect-square p-2 rounded-full flex items-center justify-center text-[15px] font-medium transition
+                        aspect-square p-1 md:p-2 rounded-full flex items-center justify-center text-sm md:text-[15px] font-medium transition
                         ${isDisabled ? 'text-[#C1CDC5] cursor-not-allowed' : 'hover:bg-[#EAF2ED] text-[#1E1B16]'}
                         ${isSelected ? 'bg-[#1F4E3D] text-white hover:bg-[#053D2A]' : ''}
                         ${!isSelected && isToday && !isDisabled ? 'text-[#1F4E3D] bg-[#EAF2ED]/50' : ''}
@@ -333,7 +333,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
             </div>
 
             {selectedDate && (
-              <div className="w-full md:w-[250px] md:flex-shrink-0 flex flex-col pt-8 md:pt-8 md:pr-8 animate-fade-in-right md:border-l border-[#E8E4DE] pl-0 md:pl-8">
+              <div className="w-full md:w-[250px] md:flex-shrink-0 flex flex-col p-6 md:p-8 animate-fade-in-right border-t md:border-t-0 md:border-l border-[#E8E4DE]">
                 <div className="text-[#1E1B16] font-medium mb-4">
                   {selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
                 </div>
@@ -395,7 +395,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
             )}
           </>
         ) : step === 'details' ? (
-          <div className="p-8 w-full">
+          <div className="p-6 md:p-8 w-full">
             {bookingError && (
               <div className="mb-6 p-4 bg-[#FFEBEB] text-[#FF3B30] rounded-[16px] text-sm border border-[#FFD1D1] flex items-start font-medium">
                  <svg className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
