@@ -144,6 +144,16 @@ export default function BookingInterface({ event, profile, availableDays = [] })
     return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
   }
 
+  const formatTimeTo12Hour = (timeStr) => {
+    if (!timeStr) return '';
+    const [hours, minutes] = timeStr.split(':');
+    let h = parseInt(hours, 10);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    h = h ? h : 12;
+    return `${h}:${minutes} ${ampm}`;
+  }
+
   if (step === 'success') {
     return (
       <div className="bg-white rounded-[24px] shadow-sm border border-[#E8E4DE] overflow-hidden max-w-[800px] w-full mx-auto">
@@ -164,7 +174,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
               </svg>
               <div>
                 {selectedDate && formatDate(selectedDate)}<br />
-                {selectedSlot && `${selectedSlot.time} (Duration: ${event.duration}m)`}
+                {selectedSlot && `${formatTimeTo12Hour(selectedSlot.time)} (Duration: ${event.duration}m)`}
               </div>
             </div>
             <div className="mt-4 flex items-center gap-3 text-[#717974]">
@@ -240,7 +250,7 @@ export default function BookingInterface({ event, profile, availableDays = [] })
               </svg>
               <div>
                 {formatDate(selectedDate)}
-                {selectedSlot && <div className="mt-1">{selectedSlot.time}</div>}
+                {selectedSlot && <div className="mt-1">{formatTimeTo12Hour(selectedSlot.time)}</div>}
               </div>
             </div>
             {(selectedSlot || step === 'details') && (
@@ -340,33 +350,45 @@ export default function BookingInterface({ event, profile, availableDays = [] })
                       No times available
                     </div>
                   ) : (
-                    availableSlots.map((slot, i) => (
-                      <div key={i} className="flex flex-col gap-1">
-                        {!slot.booked ? (
-                          <div className="flex gap-2">
-                            <button
-                              onClick={() => handleSlotSelect(slot)}
-                              className={`flex-1 py-[11px] px-4 rounded-[16px] text-sm font-bold transition border border-[#ECE7DF] text-center shadow-sm
-                                ${selectedSlot === slot 
-                                  ? 'bg-[#1F4E3D] border-[#1F4E3D] text-white w-1/2' 
-                                  : 'text-[#1F4E3D] hover:border-[#053D2A] hover:bg-[#EAF2ED] bg-white'
-                                }
-                              `}
-                            >
-                              {slot.time}
-                            </button>
-                            {selectedSlot === slot && (
-                              <button 
-                                onClick={handleContinue}
-                                className="flex-1 bg-[#053D2A] hover:bg-[#1F4E3D] text-white py-[11px] px-4 rounded-[16px] text-sm font-bold transition text-center w-1/2"
+                    availableSlots.map((slot, i) => {
+                      const time12Hour = formatTimeTo12Hour(slot.time);
+                      return (
+                        <div key={i} className="flex flex-col gap-1">
+                          {slot.booked ? (
+                            <div className="flex gap-2">
+                              <button
+                                disabled
+                                className="flex-1 py-[11px] px-4 rounded-[16px] text-sm font-bold transition border border-[#FFD1D1] text-center shadow-sm bg-[#FFEBEB] text-[#FF3B30] line-through opacity-70"
                               >
-                                Next
+                                {time12Hour}
                               </button>
-                            )}
-                          </div>
-                        ) : null}
-                      </div>
-                    ))
+                            </div>
+                          ) : (
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => handleSlotSelect(slot)}
+                                className={`flex-1 py-[11px] rounded-[16px] text-sm font-bold transition border border-[#ECE7DF] text-center shadow-sm whitespace-nowrap
+                                  ${selectedSlot === slot 
+                                    ? 'bg-[#1F4E3D] border-[#1F4E3D] text-white w-1/2 px-2' 
+                                    : 'text-[#1F4E3D] hover:border-[#053D2A] hover:bg-[#EAF2ED] bg-white px-4'
+                                  }
+                                `}
+                              >
+                                {time12Hour}
+                              </button>
+                              {selectedSlot === slot && (
+                                <button 
+                                  onClick={handleContinue}
+                                  className="flex-1 bg-[#053D2A] hover:bg-[#1F4E3D] text-white py-[11px] px-2 rounded-[16px] text-sm font-bold transition text-center w-1/2 whitespace-nowrap"
+                                >
+                                  Next
+                                </button>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })
                   )}
                 </div>
               </div>
